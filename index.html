@@ -37,12 +37,13 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <!--Search Bar-->
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  <input id="search-input" class="form-control form-control-dark w-100" type="text" placeholder="Search for a City" aria-label="Search">
+  <button id="search">Search</button>
 </nav>
 
 <!--Search History-->
 <div class="container-fluid">
-  <div class="row">
+  <div class="row"></div>
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="sidebar-sticky pt-3">
         <ul class="nav flex-column">
@@ -80,31 +81,107 @@
       </div>
     </nav>
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-      
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-5">
+        <section class="jumbotron text-center">
+            <div class="container citySearch">
+                <div id="current-weather">
+                <!--Current Search Results Here-->
+                </div>
+                <div id="forecast" class="container row">
+                    <!--Current Forecast Results Here-->
+                    </div>
+              <h1>Search</h1>
+              <p class= "text temperature"></p>
+              <p class= "text I"></p>
+              <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+              <p>
+                <a href="#" class="btn btn-primary my-2">Main call to action</a>
+                <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+              </p>
+            </div>
+          </section>
 
-      <canvas class="my-4 w-100" id="weatherChart" width="900" height="380"></canvas>
+        
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <h3>5 Day Forecast</h3>
 
-      <h2>Section title</h2>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Header</th>
-              <th>Header</th>
-              <th>Header</th>
-              <th>Header</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
+            <div class="row">
+                <!--Day 1-->
+                <div class="col-md-3">
+                <div class="card mb-4 shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">9 mins</small>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <!--Day 2-->
+                <div class="col-md-3">
+                <div class="card mb-4 shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">9 mins</small>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <!--Day 3-->
+                <div class="col-md-3">
+                <div class="card mb-4 shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                    <div class="card-body">
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">9 mins</small>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <!--Day 4-->
+                <div class="col-md-3">
+                    <div class="card mb-4 shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                        <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Day 5-->
+                <div class="col-md-3">
+                    <div class="card mb-4 shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                        <div class="card-body">
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">9 mins</small>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-  </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<div class="container">
+    <p class="float-right">
+      <button href="#">Clear All search</button>
+    </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
         <script src="script.js"></script></body>
 </html>
