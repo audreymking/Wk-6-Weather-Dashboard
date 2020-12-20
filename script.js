@@ -22,8 +22,14 @@ $(document).ready(function () {
   var windInput = $("#windSearch");
   var uvInput = $("#uvSearch");
   var clearButton = $("#clearButton");
+  var pastSearch = JSON.parse(localStorage.getItem("search")) || [];
+  var clearSearch = $(".clear")
+  console.log(pastSearch);
+  
 
   var api_key = "d5e4ae7d9f7a015268a75f16b21c662d";
+
+  
 
   $("#search").on("click", function (event) {
         //get the user inputs
@@ -32,22 +38,58 @@ $(document).ready(function () {
         $("#search-input").val("");
         //generate the current weather data
         generateCurrentWeatherData(userInput);
-        //generate forcast dataType
-        generateForcastData(userInput);
+        //generate forecast dataType
+        generateForecastData(userInput);
         //create a button + add the event listener
-            createButton();
-            $(".citybutton").addEvenListener()
-
+        pastSearch.push(userInput);
+        localStorage.setItem("search",JSON.stringify(pastSearch));
+        renderSearchHistory()
+            console.log(pastSearch);
+        
+            
+            
   });
 
-  var generateCurrentWeatherData = function(input) {
-      var currentWeatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${api_key}`;
+  $(".clear").on("click", function() {
+        pastSearch = []
+        renderSearchHistory()
+  })
+
+
+  var renderSearchHistory = function(input) {
+      var currentWeatherURL = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${api_key}`;
       $.ajax({
             type: "GET",
             url: currentWeatherURL,
             dataType: "json",
             success: function(data) {
                   console.log("data: ",data);
+                  //create new searchhistory markup - html
+                  var searchHistoryMarkup = `
+                        <div class="card">
+                              <div class="card-body">
+                                    <h3 class="card-title">
+                                    ${data.name}
+                                    </h3>
+                               </div>
+                        </div>
+                  `;
+                  //inject the html into the continer where curent weather will show
+                  $(".search-history").html(searchHistoryMarkup);
+                  
+            }
+      }); 
+  }
+
+
+  var generateCurrentWeatherData = function(input) {
+      var currentWeatherURL = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${api_key}`;
+      $.ajax({
+            type: "GET",
+            url: currentWeatherURL,
+            dataType: "json",
+            success: function(data) {
+                  //console.log("data: ",data);
                   //create new weather markup - html
                   var currentWeatherMarkup = `
                         <div class="card">
@@ -64,65 +106,52 @@ $(document).ready(function () {
                   `;
                   //inject the html into the continer where curent weather will show
                   $("#current-weather").html(currentWeatherMarkup);
-
+                  
             }
       });
   }
 
-  var generateForcastData = function(input) {
+  var generateForecastData = function(input) {
       var currentWeatherURL = `http://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=${api_key}`;
       $.ajax({
             type: "GET",
             url: currentWeatherURL,
             dataType: "json",
             success: function(data) {
-                  console.log("data: ",data);
-                  var forcastString = "";
+                  // console.log("data: ",data);
+                  var forecastString = "";
                   for(var i=0; i < data.list.length; i++) {
                         if (data.list[i].dt_txt.indexOf("12:00:00") > -1) {
 
                               //create new weather markup - html
-                              var forcastMarkup = `
-                                    <div class="col-md-2">
+                              var forecastMarkup = `
+                                    <div class="col-md-3">
                                           <div class="card bg-primary text-white">
-                                                <div class="card-body p-2">
-                                                      <h5 class="card-title">12/19/2020</h5>
+                                                <div class="card-body p-3">
+                                                      <h5 class="card-title">${data.list[i].dt_txt}</h5>
+                                                      
                                                       <img src="http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png">
-                                                      <p class="card-text">Temp: 19.15 °F</p>
-                                                      <p class="card-text">Humidity: 82%</p>
+                                                      <p class="card-text">Temp: ${data.list[i].main.temp} °F </p>
+                                                      <p class="card-text">Humidity: ${data.list[i].main.humidity} %</p>
                                                 </div>
                                           </div>
                                     </div>
                               `;
-                              forcastString += forcastMarkup;
+                              forecastString += forecastMarkup;
                         }
                   }
                   //inject the html into the continer where curent weather will show
-                  $("#forecast").html(forcastString);
+                  $("#forecast").html(forecastString);
 
             }
       });
+
+      
   }
+
+  
+  
+  
 });
 
-//     if (event.keyCode == 13) {
-//           event.preventDefault()
-//           var searchTerm = $("#search").val()
-//           var searchURL = "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=" + api_key
-//           console.log(searchURL)
-//           $.ajax({
-//                 url: searchURL,
-//                 method: "GET"
-//           }).then(function (response) {
-//                 console.log(response)
-//                 cityInput.text(response.city.name)
-//                 console.log(cityInput)
-//             //     tempInput.text(response.hits[0].recipe.label)
-//             //     for (i = 0; i < response.hits[0].recipe.ingredients.length; i++) {
-//             //           newIngredient = $("<li>")
-//             //           newIngredient.text(response.hits[0].recipe.ingredients[i].text)
-//             //           ingredientsList.append(newIngredient)
-//             //     }
-//           })
-
-//     }
+//     
